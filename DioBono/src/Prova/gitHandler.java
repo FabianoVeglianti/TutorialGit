@@ -10,23 +10,16 @@ import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
-import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 
 public class gitHandler {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, GitAPIException {
 		System.out.println("Hello Git!");
-		try {
-			ListCommits();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (GitAPIException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		ListCommits();
+		
 	}
 	
 	public static void ListCommits() throws IOException, GitAPIException {
@@ -34,10 +27,6 @@ public class gitHandler {
 		repositoryBuilder.setMustExist( true );
 		repositoryBuilder.setGitDir(new File("C:/Users/fabia/git/TutorialGit"));
 		Repository repository = repositoryBuilder.build();
-		
-		RevCommit youngestCommit = null;
-		Git git = new Git(repository);
-		List<Ref> branches = git.branchList().setListMode(ListMode.ALL).call();
 	
 		// Config
 		Config cfg = repository.getConfig();
